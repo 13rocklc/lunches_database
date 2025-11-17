@@ -24,4 +24,16 @@ Role TINYINT(1)
 ");
 $stmt->execute();
 echo("tblusers created<br>");
+
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblfood; 
+CREATE TABLE tblfood
+(FoodID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+Name VARCHAR(20) NOT NULL,
+Description VARCHAR(20) NOT NULL,
+Category VARCHAR(30) NOT NULL,
+Price DECIMAL(15,2) NOT NULL
+);
+");
+$stmt->execute();
+echo("tblfood created<br>");
 ?>

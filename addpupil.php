@@ -1,8 +1,15 @@
 <?php
+header("location:users.php");
 print_r($_POST);
 include_once("connection.php");    //equivalent of import
-$role=1;
-$username="bob";
+if($_POST["role"]=="admin"){
+    $role=1;
+// else if = elif
+}else{
+    $role=0;
+}
+$username=$_POST["surname"] .".". $_POST["forename"][0]; // '.' = '+' (concatenation)
+echo($username);
 $stmt=$conn->prepare("INSERT INTO tblusers 
 (UserID,Username,Surname,Forename,Password,Year,Balance,Role)
 VALUES 
