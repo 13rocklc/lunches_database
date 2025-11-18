@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    echo("Hello ".$SESSION["firstname"]);
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>          

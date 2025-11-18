@@ -1,4 +1,5 @@
 <?php
+session_start();
 //header("location: food.php");
 print_r($_POST);
 array_map("htmlspecialchars", $_POST);//sanitises inputs so no html can be injected
@@ -18,6 +19,8 @@ try{
             print_r($row);
             if ($_POST["password"]==$row["Password"]){
                 echo("password ok");
+                $_SESSION["firstname"]=£row["Forename"];
+                $_SESSION["loggedinuser"]=$row["Username"]
 
             }else{
                 echo("incorrect password");
