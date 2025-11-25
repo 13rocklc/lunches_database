@@ -1,7 +1,7 @@
 <?php
 $servername="localhost";
 $username="root";
-$password="password";
+$password="FellowWithout42*";
 $conn= new PDO("mysql:host=$servername",$username,$password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql="CREATE DATABASE IF NOT EXISTS Lunches";
@@ -23,11 +23,11 @@ Role TINYINT(1)
 );
 ");
 $stmt->execute();
-echo("tblusers created<br>");
+ echo("tblusers created<br>");
 //add in test bed of users
-;
+
 $hashedpassword=password_hash("password",PASSWORD_DEFAULT);
-echo($hashedpassword);
+
 
 $stmt=$conn->prepare("INSERT INTO tblusers 
 (UserID,Username,Surname,Forename,Password,Year,Balance,Role)
@@ -38,7 +38,7 @@ VALUES
 
 $stmt->bindParam(":Password", $hashedpassword);
 
-$stmt->execute();
+$stmt->execute(); 
 
 $stmt=$conn->prepare("DROP TABLE IF EXISTS tblfood;
 CREATE TABLE tblfood
@@ -51,4 +51,45 @@ Price DECIMAL (15,2) NOT NULL
 ");
 $stmt->execute();
 echo("tblfood created<br>");
+ 
+
+
+//add in test bed of food items
+;
+//$hashedpassword=password_hash("password",PASSWORD_DEFAULT);
+//echo($hashedpassword);
+
+ $stmt=$conn->prepare("INSERT INTO tblfood 
+(FoodID,Name,Description,Category,Price)
+VALUES
+(NULL,'Salt and vinegar crisps','Pringles, mini tube,'Snack',2.00),
+(NULL,'Ham and cheese sandwich','White bread','Main',3.00),
+(NULL,'Still water','Buxton','Drink',1.50),
+(NULL,'Freddo','Chocolate','Snack',0.99)
+");
+$stmt->execute(); 
+
+
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblorder;
+CREATE TABLE tblorder
+(OrderID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+Status VARCHAR(20) NOT NULL,
+UserID INT(4) NOT NULL,
+Oderdate DATETIME
+);
+");
+$stmt->execute();
+echo("order table made");
+
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasket;
+CREATE TABLE tblbasket
+(OrderID INT(4) NOT NULL,
+Quantity INT(2) DEFAULT 1,
+FoodID INT(4) NOT NULL,
+PRIMARY KEY (OrderID, FoodID)
+);
+");
+$stmt->execute();
+echo("basket table made");
+
 ?>
