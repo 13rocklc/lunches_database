@@ -1,8 +1,12 @@
 <?php
     session_start();
-    echo("Hello ".$SESSION["firstname"]);
+    if ($_SESSION["admin"]==1){
+        echo("Hello ".$_SESSION["firstname"]);
+    }else{
+        header("location: index.php");
+    }
+    
 ?>
-
 <!DOCTYPE HTML>
 <html>
 <head>          
